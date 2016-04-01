@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Invoices</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Amount</th>
+      <th>Desc</th>
+      <th>Date</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <%= @login %>
+        <% @invoices.each do |invoice| %>
+         <tr>
+        <td><%= invoice.amount %></td>
+        <td><%= invoice.desc %></td>
+        <td><%= invoice.date %></td>
+        <td><%= invoice.status %></td>
+        <% if current_user.admin?
+    
+           u = User.find(invoice.user_id)  %>
+
+        <td><%= u.email %></td>
+        <td><%= invoice.user.email %></td>
+     
+         <% end %>
+
+        <td><%= link_to 'Pay', invoice %></td>
+        <% if current_user.admin? %>
+        <td><%= link_to 'Show', invoice %></td>
+        <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>
+        <td><%= link_to 'Destroy', invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+ <% if  current_user.admin? %>
+
+        <td> <%= link_to 'New Invoice', new_invoice_path %></td>
+     
+         <% end %>
+

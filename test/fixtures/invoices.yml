@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  amount: 
+  limit: MyString
+  20: MyString
+  desc: MyText
+  date: 2015-11-13 13:09:31
+  status: 
+  limit: 
+
+two:
+  amount: 
+  limit: MyString
+  20: MyString
+  desc: MyText
+  date: 2015-11-13 13:09:31
+  status: 
+  limit: 
