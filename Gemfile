@@ -55,4 +55,5 @@ gem 'devise'
 # Open Source theme AdminLTE
 # - https://github.com/nicolas-besnard/adminlte2-rails
 gem 'adminlte2-rails'
-
+#Puma server
+gem 'puma'
