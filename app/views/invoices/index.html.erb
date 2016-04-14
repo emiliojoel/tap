@@ -1,50 +1,84 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Listing Invoices</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Amount</th>
-      <th>Desc</th>
-      <th>Date</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+          <!-- TABLE: LATEST ORDERS -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Listado de Ordenes</h3>
 
-  <tbody>
-  <%= @login %>
-        <% @invoices.each do |invoice| %>
-         <tr>
-        <td><%= invoice.amount %></td>
-        <td><%= invoice.desc %></td>
-        <td><%= invoice.date %></td>
-        <td><%= invoice.status %></td>
-        <% if current_user.admin?
+              
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table class="table no-margin">
+                  <thead>
+                  <tr>
+                    <th>Orden ID</th>
+                    <th>Cantidad a pagar </th>
+                    <th>Descripción</th>
+                    <th>Fecha</th>
+                     <% if current_user.admin? %>
     
-           u = User.find(invoice.user_id)  %>
+                    <th>Email</th>
 
-        <td><%= u.email %></td>
-        <td><%= invoice.user.email %></td>
-     
-         <% end %>
+                    <% end %>
+                    
+                    <th>Estado</th>
+                    <th></th>
+                  </tr>
+                  </thead>
+                  <tbody>
 
-        <td><%= link_to 'Pay', invoice %></td>
-        <% if current_user.admin? %>
-        <td><%= link_to 'Show', invoice %></td>
-        <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>
-        <td><%= link_to 'Destroy', invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+                  <% @invoices.each do |invoice| %>
 
-<br>
- <% if  current_user.admin? %>
+                  
+                  <tr>
+                    <td><a href="pages/examples/invoice.html"><%= invoice.id %></a></td>
+                    <td><%= invoice.amount %></td>
+                    <td><%= invoice.desc %></td>
+                    <td><%= invoice.created_at.strftime("%d-%m-%Y")%></td>
+                    <% if current_user.admin? %>
+    
+                    <td><%= invoice.user.email %></td>
 
-        <td> <%= link_to 'New Invoice', new_invoice_path %></td>
-     
-         <% end %>
+                    <% end %>
+
+                    <td><span class="label label-success"><%= invoice.status %></span></td>
+                    <td>
+                     
+                     <% if current_user.admin? %>
+
+                     
+                     <%= link_to('Editar', edit_invoice_path(invoice), class: "btn btn-sm btn-info btn-flat pull-left") %>
+                     <%= link_to 'Destroy', invoice, class: "btn btn-sm btn-info btn-flat pull-right", method: :delete, data: { confirm: 'Are you sure?' } %>
+                     <% else %>
+                       <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Pagar</a>
+                      <% end %>  
+                          
+                    </td>
+                  </tr>
+
+                  <% end %>
+       
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+              <% if current_user.admin? %>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+
+             <%= link_to('Nueva Orden', new_invoice_path, class: "btn btn-sm btn-info btn-flat pull-left") %>
+            
+
+             
+              <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a>
+            </div>
+            <!-- /.box-footer -->
+          </div>
+          <!-- /.box -->
+          <% end %> 
+        </div>
+
 

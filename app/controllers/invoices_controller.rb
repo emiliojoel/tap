@@ -21,6 +21,8 @@ class InvoicesController < ApplicationController
   # GET /invoices/new
   def new
     if current_user.admin?
+       @label = "Nueva"
+       @button = "Crear Orden"
        @invoice = Invoice.new
         else
     redirect_to :action => 'index'
@@ -29,6 +31,12 @@ class InvoicesController < ApplicationController
 
   # GET /invoices/1/edit
   def edit
+    if current_user.admin?
+    @label = "Editar"
+    @button = "Modificar Orden"
+    else
+    redirect_to :action => 'index'
+    end
   end
 
   # POST /invoices
@@ -83,6 +91,9 @@ class InvoicesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_invoice
+      if !(current_user.admin?)
+        redirect_to :action => 'index'
+    end
       @invoice = Invoice.find(params[:id])
     end
 

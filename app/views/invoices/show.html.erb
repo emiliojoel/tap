@@ -1,24 +1,51 @@
-<p id="notice"><%= notice %></p>
+<!-- TABLE: LATEST ORDERS -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Resultado de edición de Orden</h3>
 
-<p>
-  <strong>Amount:</strong>
-  <%= @invoice.amount %>
-</p>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table class="table no-margin">
+                  <thead>
+                    <tr>
+                    <th>Descripción</th>
+                    <th>Cantidad a pagar </th>
+                    <th>Estado</th>
+                    <th>Fecha</th>
+                    <th>Email</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                 <tr>
+                    <td><%= @invoice.desc %></td>
+                    <td><%= @invoice.amount %></td>
+                    <td><%= @invoice.status %></td>
+                    <td><%= @invoice.created_at.strftime("%d-%m-%Y")%></td>
+                    <td><%= @invoice.user.email %></td>
+                 </tr>
+     
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+              <% if current_user.admin? %>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
 
-<p>
-  <strong>Desc:</strong>
-  <%= @invoice.desc %>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @invoice.date %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @invoice.status %>
-</p>
-
-<%= link_to 'Edit', edit_invoice_path(@invoice) %> |
-<%= link_to 'Back', invoices_path %>
+            <%= link_to('Editar', edit_invoice_path(@invoice), class: "btn btn-sm btn-info btn-flat pull-left") %>
+            <%= link_to('Volver', invoices_path, class: "btn btn-sm btn-info btn-flat pull-right") %>
+                                              
+            </div>
+            <!-- /.box-footer -->
+          </div>
+          <!-- /.box -->
+          <% end %> 
+        </div>
