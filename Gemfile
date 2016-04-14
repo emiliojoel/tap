@@ -56,4 +56,4 @@ gem 'devise'
 # - https://github.com/nicolas-besnard/adminlte2-rails
 gem 'adminlte2-rails'
 #Puma server
-gem 'puma'
+#gem 'puma'
