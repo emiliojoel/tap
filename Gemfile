@@ -57,3 +57,5 @@ gem 'devise'
 gem 'adminlte2-rails'
 #Puma server
 #gem 'puma'
+#recomended by Heroku
+gem 'rails_12factor'
