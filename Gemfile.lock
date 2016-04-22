@@ -250,7 +250,6 @@ PLATFORMS
 DEPENDENCIES
   adminlte2-rails
   airbrussh
-  bundler
   capistrano (~> 3.1)
   capistrano-pending
   capistrano-rails (~> 1.1)
@@ -260,6 +259,7 @@ DEPENDENCIES
   capistrano3-unicorn
   coffee-rails (~> 4.0.0)
   devise
+  execjs
   guard-rubocop
   jbuilder (~> 2.0)
   jquery-rails
