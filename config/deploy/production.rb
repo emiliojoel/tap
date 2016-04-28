@@ -1,4 +1,4 @@
-server '54.85.33.120', user: 'apps', roles: %w{app db web}
+server '54.83.163.109', user: 'apps', roles: %w{app db web}
 
 set :deploy_to, ->{ "/home/apps/#{fetch(:application)}" }
 
