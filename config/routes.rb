@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
+  
+  devise_for :users, :controllers => { :registrations => 'registrations'}
+  resources :users, :only => [:index, :edit, :show, :update, :destroy]
+ # devise_scope :user do
+ # match '/users/index', to: 'devise/registrations#index', via: :get
+#end
+  
   resources :invoices
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

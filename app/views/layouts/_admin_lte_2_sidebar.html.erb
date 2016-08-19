@@ -10,7 +10,15 @@
       <li class="header">Didac Sports</li>
         <!-- Optionally, you can add icons to the links -->
       <li class="active"><a href="<%= invoices_path %>"><i class='fa fa-link'></i> <span>Ordenes</span></a></li>
-      <li><a href="#"><i class='fa fa-link'></i> <span>Usuarios</span></a></li>
+        <!-- Optionally, you can add icons to the links -->
+   
+   <%  if current_user.admin? %>
+
+        <li class="active"><a href="<%= users_path %>"><i class='fa fa-link'></i> <span>Usuarios</span></a></li>
+
+        <% end  %>
+      
+      
       </ul><!-- /.sidebar-menu -->
   </section>
   <!-- /.sidebar -->

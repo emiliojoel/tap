@@ -1,0 +1,69 @@
+<!-- TABLE: LATEST ORDERS -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Listado de usuarios</h3>
+
+              
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table class="table no-margin">
+                  <thead>
+                  <tr>
+                    <th>User ID</th>
+                    <th>Email </th>
+                    <th>Fecha</th>
+                    <th>Admin?</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+
+              
+
+               
+
+               <% @users.each do |user| %> 
+                
+
+                  
+                  <tr>
+                    <td><a href="pages/examples/user.html"><%= user.id %></a></td>
+                    <td><%= user.email %></td>
+                    <td><%= user.created_at.strftime("%d-%m-%Y")%></td>
+                    <td><span class="label label-success"><%= user.admin %></span></td>
+                    <td>
+                     
+                                         
+                     <%= link_to('Editar', edit_user_path(user), class: "btn btn-sm btn-info btn-flat pull-left") %>
+                   
+                     
+                      <%= link_to 'Eliminar', user, class: "btn btn-sm btn-info btn-flat pull-right", method: :delete, data: { confirm: 'Are you sure?' } %>
+                                               
+                    </td>
+                  </tr>
+
+                  <% end %>
+       
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+              
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+
+            
+            <%= link_to('Nuevo Usuario', new_user_registration_path, class: "btn btn-sm btn-info btn-flat pull-left") %>
+
+             
+              
+            </div>
+            <!-- /.box-footer -->
+          </div>
+          <!-- /.box -->
+         
+        </div>
+
+
