@@ -12,6 +12,7 @@
                   <thead>
                   <tr>
                     <th>User ID</th>
+                    <th>Nombre </th>
                     <th>Email </th>
                     <th>Fecha</th>
                     <th>Admin?</th>
@@ -29,6 +30,7 @@
                   
                   <tr>
                     <td><a href="pages/examples/user.html"><%= user.id %></a></td>
+                    <td><%= user.name %></td>
                     <td><%= user.email %></td>
                     <td><%= user.created_at.strftime("%d-%m-%Y")%></td>
                     <td><span class="label label-success"><%= user.admin %></span></td>

@@ -1,0 +1,105 @@
+<!-- TABLE: LATEST ORDERS -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Procesando pago de Orden</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <script>
+
+              var auto_refresh = setInterval(
+              function()
+                       {
+                        submitform();
+                        }, 1000);
+
+              function submitform()
+                       {
+                        document.payment.submit();
+                        }
+             </script>
+            <form name="payment" id="payment" action="https://pmt.pagantis.com/v1/installments" method="post">
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table class="table no-margin">
+                  <thead>
+                    <tr>
+                    <th>Descripción</th>
+                    <th>Cantidad a pagar </th>
+                    <th>Estado</th>
+                    <th>Fecha</th>
+                    <th>Email</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                 <tr>
+                    <td><%= @invoice.desc %></td>
+                    <td><%= @invoice.amount %></td>
+                    <td><%= @invoice.status %></td>
+                    <td><%= @invoice.created_at.strftime("%d-%m-%Y")%></td>
+                    <td><%= @invoice.user.email %></td>
+                    <td><input class="btn btn-sm btn-info btn-flat pull-left" type="submit" value="Procesando Pago"/> <td>
+                    
+                     <!-- hidden fields-->  
+
+                     <!--datos de la transacción -->
+
+                     <input name="order_id" type="hidden" value="<%= @invoice.id %>"/>
+                     <input name="amount" type="hidden" value="<%= @invoice.amount %>"/>
+                     <input name="currency" type="hidden" value="<%= @currency %>" />
+                     <input name="description" type="hidden" value="<%= @invoice.desc %>" />
+
+                     <!--URLs de retorno -->
+
+                     <input name="ok_url" type="hidden" value="<%= @ok_url %>" />
+                     <input name="nok_url" type="hidden" value="<%= @nok_url %>" />
+                     <input type="hidden" id="callback_url" name="callback_url" value="<%= @callback_url %>">
+
+                      <!--personalización UI -->
+                     <input name="locale" type="hidden" value="ES" />
+                     <input type="hidden" id="iframe" name="iframe" value="false">
+
+                     <!--datos del usuario --> 
+                     <!-- <input name="full_name" type="hidden" value="<%= @invoice.user.name %>"> -->
+                     <input name="full_name" type="hidden" value="Pepe Perez">
+                     <input name="email" type="hidden" value="<%= @invoice.user.email %>">
+                    
+                      <!--firma de la operación -->
+                      <input name="account_id" type="hidden" value="<%= @account_id %>" />
+                      <input name="signature" type="hidden" value="<%= @sign %>"" />
+
+
+    
+   
+    
+  
+   
+    
+                     <!-- hidden fields finish--> 
+                 </tr>
+     
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+              <% if current_user.admin? %>
+            </div>
+             </form>
+
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+
+            <%= link_to('Editar', edit_invoice_path(@invoice), class: "btn btn-sm btn-info btn-flat pull-left") %>
+            <%= link_to('Volver', invoices_path, class: "btn btn-sm btn-info btn-flat pull-right") %>
+                                              
+            </div>
+            <!-- /.box-footer -->
+          </div>
+          <!-- /.box -->
+          <% end %> 
+        </div>

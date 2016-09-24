@@ -1,6 +1,4 @@
- 
-
-          <!-- TABLE: LATEST ORDERS -->
+<!-- TABLE: LATEST ORDERS -->
           <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">Listado de Ordenes</h3>
@@ -19,7 +17,7 @@
                     <th>Fecha</th>
                      <% if current_user.admin? %>
     
-                    <th>Usuario</th>
+                    <th>Email</th>
 
                     <% end %>
                     
@@ -31,17 +29,15 @@
 
                   <% @invoices.each do |invoice| %>
 
-                  
+                  <form action="https://pmt.pagantis.com/v1/installments" method="post">
                   <tr>
-                  <% if current_user.admin? %>
-                    <td><%= invoice.id %></a>  </td>
-                    <% end %>
+                    <td><a href="pages/examples/invoice.html"><%= invoice.id %></a> </td>
                     <td><%= invoice.amount %></td>
-                    <td><%= invoice.desc %> </td>
+                    <td><%= invoice.desc %></td>
                     <td><%= invoice.created_at.strftime("%d-%m-%Y")%></td>
                     <% if current_user.admin? %>
     
-                    <td><%= invoice.user.name %></td>
+                    <td><%= invoice.user.email %></td>
 
                     <% end %>
 
@@ -49,20 +45,20 @@
                     <td>
                      
                      <% if current_user.admin? %>
+
                      
-                                     
                      <%= link_to('Editar', edit_invoice_path(invoice), class: "btn btn-sm btn-info btn-flat pull-left") %>
                      <%= link_to 'Destroy', invoice, class: "btn btn-sm btn-info btn-flat pull-right", method: :delete, data: { confirm: 'Are you sure?' } %>
                      <% else %>
-
-                    <!-- <input class="btn btn-sm btn-info btn-flat pull-left" type="submit" value="Realizar pago"/> -->
+                       <!-- <input class="btn btn-sm btn-info btn-flat pull-left" type="submit" value="Realizar pago"/> -->
                         <%= link_to('Realizar pago', payment_path(invoice), class: "btn btn-sm btn-info btn-flat pull-left") %>
                        
                       <% end %>  
                           
                     </td>
                   </tr>
-                 
+                  </form>
+
                   <% end %>
        
                   </tbody>

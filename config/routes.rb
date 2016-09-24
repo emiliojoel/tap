@@ -6,7 +6,16 @@ Rails.application.routes.draw do
  # match '/users/index', to: 'devise/registrations#index', via: :get
 #end
   
-  resources :invoices
+  resources :invoices do
+  collection do
+    get 'OK'
+  end
+  collection do
+    get 'KO'
+  end
+  end
+  get '/payment/:id', to: 'invoices#payment', as: 'payment'
+  post 'pmt_site', to: redirect('https://pmt.pagantis.com/v1/installments')
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
