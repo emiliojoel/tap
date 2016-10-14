@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :operations, :only => [:index]
   devise_for :users, :controllers => { :registrations => 'registrations'}
   resources :users, :only => [:index, :edit, :show, :update, :destroy]
  # devise_scope :user do
@@ -15,7 +16,7 @@ Rails.application.routes.draw do
   end
   end
   get '/payment/:id', to: 'invoices#payment', as: 'payment'
-  post 'pmt_site', to: redirect('https://pmt.pagantis.com/v1/installments')
+  post 'callback', to: 'operations#CB', as: 'callback'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -13,7 +13,9 @@
                 <table class="table no-margin">
                   <thead>
                   <tr>
+                  <% if current_user.admin? %>
                     <th>Orden ID</th>
+                    <% end %>
                     <th>Cantidad a pagar </th>
                     <th>Descripción</th>
                     <th>Fecha</th>
@@ -53,10 +55,13 @@
                                      
                      <%= link_to('Editar', edit_invoice_path(invoice), class: "btn btn-sm btn-info btn-flat pull-left") %>
                      <%= link_to 'Destroy', invoice, class: "btn btn-sm btn-info btn-flat pull-right", method: :delete, data: { confirm: 'Are you sure?' } %>
-                     <% else %>
+                     <% else 
+                      if invoice.status != "Pagada" %>
 
                     <!-- <input class="btn btn-sm btn-info btn-flat pull-left" type="submit" value="Realizar pago"/> -->
                         <%= link_to('Realizar pago', payment_path(invoice), class: "btn btn-sm btn-info btn-flat pull-left") %>
+
+                        <% end %> 
                        
                       <% end %>  
                           

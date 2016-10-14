@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  event: MyString
+  api_version: MyString
+  account_id: MyString
+  signature: MyString
+  data: MyString
+
+two:
+  event: MyString
+  api_version: MyString
+  account_id: MyString
+  signature: MyString
+  data: MyString

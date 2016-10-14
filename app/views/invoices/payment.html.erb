@@ -9,7 +9,7 @@
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
               </div>
             </div>
-            <script>
+          <script>
 
               var auto_refresh = setInterval(
               function()
@@ -21,7 +21,7 @@
                        {
                         document.payment.submit();
                         }
-             </script>
+             </script> 
             <form name="payment" id="payment" action="https://pmt.pagantis.com/v1/installments" method="post">
             <!-- /.box-header -->
             <div class="box-body">
@@ -50,7 +50,7 @@
                      <!--datos de la transacción -->
 
                      <input name="order_id" type="hidden" value="<%= @invoice.id %>"/>
-                     <input name="amount" type="hidden" value="<%= @invoice.amount %>"/>
+                     <input name="amount" type="hidden" value="<%= @amount %>"/>
                      <input name="currency" type="hidden" value="<%= @currency %>" />
                      <input name="description" type="hidden" value="<%= @invoice.desc %>" />
 

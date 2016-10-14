@@ -96,8 +96,16 @@ class InvoicesController < ApplicationController
 
   # PAYMENT
   def payment
-      #redirect_to generate_url("https://pmt.pagantis.com/v1/installments", :param1 => @invoice.id, :param2 => @invoice.amount)
-      #redirect_to pmt_site_path
+      
+  end
+
+  # PAYMENT callback /invoices/CB
+  def CB
+
+    
+
+
+       
   end
 
   private
@@ -109,13 +117,14 @@ class InvoicesController < ApplicationController
     def set_signature
       @account_id = "tk_f36092c67ea4cbc8e954aa2c"
       ck = "04d8871b2bbeb279"
-      @ok_url = "https://url/invoice/OK"
-      @nok_url = "https://url/invoice/KO"
-      amount = @invoice.amount
+      base_url = "https://5c645adf.ngrok.io"
+      @ok_url = "#{base_url}/invoices/OK"
+      @nok_url = "#{base_url}/invoices/KO"
+      @amount = (@invoice.amount.to_f * 100).to_i.to_s
       @currency = "EUR"
       order_id = @invoice.id.to_s
-      @callback_url = "http://mi_tienda/pmt/validation"
-      signature_fields = ck + @account_id + order_id + amount + @currency + @ok_url + @nok_url + @callback_url
+      @callback_url = "#{base_url}/callback"
+      signature_fields = ck + @account_id + order_id + @amount + @currency + @ok_url + @nok_url + @callback_url
       @sign=Digest::SHA1.hexdigest(signature_fields)
     end
     
@@ -129,9 +138,4 @@ class InvoicesController < ApplicationController
       params.require(:invoice).permit(:amount, :desc, :date, :status, :user_id)
     end
 
-  def generate_url(url, params = {})
-      uri = URI(url)
-      uri.query = params.to_query
-      uri.to_s
-     end  
-end
+  end
