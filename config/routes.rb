@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  resources :operations, :only => [:index]
+  resources :operations, :only => [:index, :show]
   devise_for :users, :controllers => { :registrations => 'registrations'}
   resources :users, :only => [:index, :edit, :show, :update, :destroy]
  # devise_scope :user do

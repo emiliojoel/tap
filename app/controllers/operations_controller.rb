@@ -1,9 +1,9 @@
 class OperationsController < ApplicationController
-  #before_action :set_operation, only: [:show, :edit, :update, :destroy]
+  before_action :set_operation, only: [:show]
   before_action :protect_CB, only: [:CB]
   skip_before_action :verify_authenticity_token, only: [:CB]
   skip_before_action :authenticate_user!, only: [:CB]
- 
+  before_action :admin_user!
 
   # GET /operations
   # GET /operations.json
@@ -13,8 +13,8 @@ class OperationsController < ApplicationController
 
   # GET /operations/1
   # GET /operations/1.json
-#  def show
-#  end
+  def show
+  end
 
   # GET /operations/new
  # def new
@@ -83,9 +83,9 @@ class OperationsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    #def set_operation
-    #  @operation = Operation.find(params[:id])
-    #end
+    def set_operation
+      @operation = Operation.find(params[:id])
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def operation_params

@@ -38,7 +38,7 @@
                   <% if current_user.admin? %>
                     <td><%= invoice.id %></a>  </td>
                     <% end %>
-                    <td><%= invoice.amount %></td>
+                    <td><%= invoice.amount %> €</td>
                     <td><%= invoice.desc %> </td>
                     <td><%= invoice.created_at.strftime("%d-%m-%Y")%></td>
                     <% if current_user.admin? %>

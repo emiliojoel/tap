@@ -1,35 +1,60 @@
-<p id="notice"><%= notice %></p>
+<!-- TABLE: LATEST OPERATIONS -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Listado de Operaciones</h3>
 
-<h1>Listing Operations</h1>
+              
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table class="table no-margin">
+                  <thead>
+                  <tr>
+                    <th>ID operación</th>
+                    <th>ID orden</th>
+                    <th>Email</th>
+                    <th>Fecha</th>
+                    <th>Importe</th>
+                    <th>Evento</th>
+                    <th></th>
+                    
+                  </tr>
+                  </thead>
+                  <tbody>
 
-<table>
-  <thead>
-    <tr>
-      <th>Event</th>
-      <th>Api version</th>
-      <th>Account</th>
-      <th>Signature</th>
-      <th>Data</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+                  <% @operations.each do |operation| %>
+                   
+                     <% data = JSON.parse operation.data.gsub("=>nil", "=>\"\"").gsub("=>", ":")  
+                        
+                      %> 
+                  
+                  <tr>
+                    <td><%= data["id"] %></td>
+                    <td><%= link_to(data["order_id"], invoice_path(data["order_id"]), class: "btn btn-sm btn-info btn-flat pull-left")%></td>
+                    <td><%= data["metadata"]["user_email"] %></td>
+                    <td><%= DateTime.parse(data["created_at"]).strftime("%d-%m-%Y") %></td>
+                    <td><%= (data["amount"].to_f/100) %></td>
+                    <td><%= operation.event %></td>
+                    <th><%= link_to('Detalles', operation, class: "btn btn-sm btn-info btn-flat pull-left") %></th>
+                                       
+                  </tr>
+                 
+                  <% end %>
+       
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+               </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
 
-  <tbody>
-    <% @operations.each do |operation| %>
-      <tr>
-        <td><%= operation.event %></td>
-        <td><%= operation.api_version %></td>
-        <td><%= operation.account_id %></td>
-        <td><%= operation.signature %></td>
-        <td><%= operation.data %></td>
-   <!--     <td><%= link_to 'Show', operation %></td>
-        <td><%= link_to 'Edit', edit_operation_path(operation) %></td>
-        <td><%= link_to 'Destroy', operation, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Operation', new_operation_path %>
+                         
+           
+            </div>
+            <!-- /.box-footer -->
+          </div>
+          <!-- /.box -->
+         
+        </div>
