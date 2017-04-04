@@ -8,7 +8,7 @@ def index
  
  def edit
    
-  end
+ end
 
  def update
         respond_to do |format|
@@ -23,9 +23,6 @@ def index
   end
 
 def destroy
-    if !(current_user.admin?)
-        redirect_to :action => 'index'
-    end
     @user.destroy
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'user was successfully destroyed.' }

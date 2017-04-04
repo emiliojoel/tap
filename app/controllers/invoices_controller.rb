@@ -14,6 +14,7 @@ class InvoicesController < ApplicationController
     @invoices = current_user.invoices.all
     end 
   @login = current_user.email
+  @LABEL = { Pendiente: "warning", Pagada: "success", Denegada: "danger" }
   end
 
   # GET /invoices/1
@@ -45,7 +46,7 @@ class InvoicesController < ApplicationController
 
     respond_to do |format|
       if @invoice.save
-        format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
+        format.html { redirect_to @invoice, notice: 'Orden creada correctamente.' }
         format.json { render :show, status: :created, location: @invoice }
       else
         format.html { render :new }
@@ -59,7 +60,7 @@ class InvoicesController < ApplicationController
   def update
     respond_to do |format|
       if @invoice.update(invoice_params)
-        format.html { redirect_to @invoice, notice: 'Invoice was successfully updated.' }
+        format.html { redirect_to @invoice, notice: 'Orden actualizada correctamente.' }
         format.json { render :show, status: :ok, location: @invoice }
       else
         format.html { render :edit }
@@ -73,7 +74,7 @@ class InvoicesController < ApplicationController
   def destroy
     @invoice.destroy
     respond_to do |format|
-      format.html { redirect_to invoices_url, notice: 'Invoice was successfully destroyed.' }
+      format.html { redirect_to invoices_url, notice: 'Orden borrada correctamente.' }
       format.json { head :no_content }
     end
   end
@@ -96,28 +97,20 @@ class InvoicesController < ApplicationController
 
   # PAYMENT
   def payment
-      
   end
-
-  # PAYMENT callback /invoices/CB
-  def CB
-
-    
-
-
-       
-  end
-
+  
   private
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_invoice
       @invoice = Invoice.find(params[:id])
     end
 
+    # Create the signature to send to Pagamastarde.
     def set_signature
       @account_id = "tk_f36092c67ea4cbc8e954aa2c"
       ck = "04d8871b2bbeb279"
-      base_url = "https://33fead9a.ngrok.io"
+      base_url = "https://beb7d4c9.ngrok.io"
       @ok_url = "#{base_url}/invoices/OK"
       @nok_url = "#{base_url}/invoices/KO"
       @amount = (@invoice.amount.to_f * 100).to_i.to_s
@@ -130,7 +123,7 @@ class InvoicesController < ApplicationController
     
 
 
-  def set_header
+    def set_header
       @header = "Ordenes"
     end
     # Never trust parameters from the scary internet, only allow the white list through.
