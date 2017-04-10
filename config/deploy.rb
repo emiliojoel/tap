@@ -3,7 +3,7 @@ lock '3.4.0'
 
 set :application, 'tap'
 set :repo_url, 'git@github.com:emiliojoel/tap.git'
-set :rvm_ruby_version, '2.2.2'
+set :rvm_ruby_version, '2.3.1'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
