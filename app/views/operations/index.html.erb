@@ -25,8 +25,8 @@
 
                   <% @operations.each do |operation| %>
                    
-                     <% dataraw = JSON.parse operation.data
-                     data = dataraw.gsub("=>nil", "=>\"\"").gsub("=>", ":")  
+                     <% dataraw = operation.data.gsub("=>nil", "=>\"\"").gsub("=>", ":")
+                     data = dataraw.JSON.parse 
                         
                       %> 
                   
