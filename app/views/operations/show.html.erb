@@ -20,7 +20,7 @@
                   </thead>
                   <tbody>
                  <tr>
-                    <td><pre><%=  JSON.pretty_generate(JSON.parse @operation.data.gsub("=>nil", "=>\"\"").gsub("=>", ":")) %></pre></td>
+                    <td><pre><%=  JSON.pretty_generate(JSON.parse @operation.data.to_s.gsub("=>nil", "=>\"\"").gsub("=>", ":")) %></pre></td>
                     
                  </tr>
      
