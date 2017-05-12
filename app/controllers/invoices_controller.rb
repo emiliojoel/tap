@@ -110,7 +110,7 @@ class InvoicesController < ApplicationController
     def set_signature
       @account_id = "tk_f36092c67ea4cbc8e954aa2c"
       ck = "04d8871b2bbeb279"
-      base_url = "https://beb7d4c9.ngrok.io"
+      base_url = "http://34.203.137.175"
       @ok_url = "#{base_url}/invoices/OK"
       @nok_url = "#{base_url}/invoices/KO"
       @amount = (@invoice.amount.to_f * 100).to_i.to_s
